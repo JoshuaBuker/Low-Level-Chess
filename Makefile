@@ -2,17 +2,17 @@
 CXX = gcc
 
 # Compiler flags
-CXXFLAGS = -Wall -I./
+CXXFLAGS = -Wall -I./ -I./game-logic/header -I./util/header
 
 # Find all source files
-SRC_DIRS = ./
+SRC_DIRS = ./ ./game-logic/source ./util/source
 SRCS = $(wildcard $(addsuffix /*.c,$(SRC_DIRS)))
 
 # Object files
 OBJS = $(SRCS:.c=.o)
 
 # Output executable
-OUTPUT = chessProgram
+OUTPUT = game
 
 # Default target
 all: $(OUTPUT) clean
