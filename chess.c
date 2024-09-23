@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "func.h"
+#include "game-logic/header/func.h"
 
 #define GRID_SIZE 8
 
@@ -16,7 +16,11 @@ int main(void) {
     {'r', 'n', 'b', 'k', 'q', 'b', 'n', 'r'}
   };
 
-  printBoard(board, GRID_SIZE);
+  while (1) {
+      printBoard(board, GRID_SIZE);
+      movePiece(board, GRID_SIZE);
+      system("cls");
+  }
 
   return 0;
 }
