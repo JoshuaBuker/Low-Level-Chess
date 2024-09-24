@@ -4,5 +4,12 @@
     "func.h": "c",
     "rules.h": "c",
     "util.h": "c"
-  }
+  },
+  "makefile.launchConfigurations": [
+    {
+      "cwd": "c:\\Users\\super\\Documents\\GitHub\\Low-Level-Chess",
+      "binaryPath": "c:\\Users\\super\\Documents\\GitHub\\Low-Level-Chess\\game",
+      "binaryArgs": []
+    }
+  ]
 }

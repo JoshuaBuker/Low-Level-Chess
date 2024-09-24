@@ -27,7 +27,7 @@ void movePiece(char *board, const int size) {
   const int letterOffset = 97, numberOffset = 49;
   char input[32];
 
-  inputStringPrompt(input, "\n\nEnter your move: ", "\n\n");
+  inputStringPrompt(input, "\n\nEnter your better move: ", "\n\n");
 
   for (int i = 0; input[i]; i++) {
     input[i] = tolower(input[i]);
