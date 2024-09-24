@@ -1,6 +1,8 @@
 #include <stdio.h>
 
+#ifndef GRID_SIZE
 #define GRID_SIZE 8
+#endif
 
 // char get_c(const char arr[GRID_SIZE][GRID_SIZE], const int size, const int i, const int j) {
 //   return *((arr+i*size) + j);

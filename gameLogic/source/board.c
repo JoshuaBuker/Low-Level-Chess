@@ -3,8 +3,13 @@
 #include <ctype.h>
 #include "gameLogic/header/rules.h"
 
-#define MAX_LOOPS 10
+#ifndef GRID_SIZE
 #define GRID_SIZE 8
+#endif
+
+#ifndef MAX_LOOPS
+#define MAX_LOOPS 10
+#endif
 
 // ======================================================================== Print Board
 void printBoard(const char board[GRID_SIZE][GRID_SIZE], const int size) {

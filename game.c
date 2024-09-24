@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include "gameLogic/header/board.h"
+#include <stdlib.h>
 
+#ifndef GRID_SIZE
 #define GRID_SIZE 8
+#endif
 
 int main(void) {
   char board[GRID_SIZE][GRID_SIZE] =
