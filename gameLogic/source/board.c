@@ -4,13 +4,15 @@
 #include "gameLogic/header/rules.h"
 
 #define MAX_LOOPS 10
+#define GRID_SIZE 8
 
 // ======================================================================== Print Board
-void printBoard(const char *board, const int size) {
+void printBoard(const char board[GRID_SIZE][GRID_SIZE], const int size) {
   for (int i = 0; i < size; i++) {
     printf(" %d  ", i + 1);
     for (int j = 0; j < size; j++) {
-      printf("[%c]", get_c(board, size, i, j));
+      // printf("[%c]", get_c(board, size, i, j));
+      printf("[%c]", board[i][j]);
     }
     printf("\n");
   }
@@ -23,7 +25,7 @@ void printBoard(const char *board, const int size) {
 }
 
 // ======================================================================== Move Piece
-void movePiece(char *board, const int size) {
+void movePiece(char board[GRID_SIZE][GRID_SIZE], const int size) {
   const int letterOffset = 97, numberOffset = 49;
   char input[32];
 
@@ -43,7 +45,8 @@ void movePiece(char *board, const int size) {
   int newI = ((int)input[3]) - numberOffset;
   // 3
 
-  char pieceToMove = get_c(board, size, oldI, oldJ);
+  // char pieceToMove = get_c(board, size, oldI, oldJ);
+  char pieceToMove = board[oldI][oldJ];
 
   // switch (toLower(pieceToMove)) {
   //   case 'p':
@@ -60,6 +63,9 @@ void movePiece(char *board, const int size) {
   //     if (1 != isValidMoveBishop(pieceToMove, board, size, oldI, oldJ, newI, newJ)) { return; }break;
   // }
 
-  set_c(board, size, oldI, oldJ, ' ');
-  set_c(board, size, newI, newJ, pieceToMove);
+  // set_c(board, size, oldI, oldJ, ' ');
+  // set_c(board, size, newI, newJ, pieceToMove);
+
+  board[oldI][oldJ] = ' ';
+  board[newI][newJ] = pieceToMove;
 }
