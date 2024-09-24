@@ -2,10 +2,10 @@
 CXX = gcc
 
 # Compiler flags
-CXXFLAGS = -Wall -I./ -I./gameLogic/header -I./util/header
+CXXFLAGS = -Wall -I./ -IgameLogic/header -Iutil/header
 
 # Find all source files
-SRC_DIRS = ./ ./gameLogic/source ./util/source
+SRC_DIRS = ./ gameLogic/source util/source
 SRCS = $(wildcard $(addsuffix /*.c,$(SRC_DIRS)))
 
 # Object files
