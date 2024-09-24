@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <./util.h>
+#include "./util/header/util.h"
 #include <ctype.h>
 #include "./gameLogic/header/rules.h"
 
