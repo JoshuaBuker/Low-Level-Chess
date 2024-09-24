@@ -1,17 +1,15 @@
 #include <stdio.h>
 #include <./util.h>
 #include <ctype.h>
-#include <game.c>
+#include "./gameLogic/header/rules.h"
 
 #define MAX_LOOPS 10
 
-void printBoard(const char *board, const int size)
-{
-  for (int i = 0; i < size; i++)
-  {
+// ======================================================================== Print Board
+void printBoard(const char *board, const int size) {
+  for (int i = 0; i < size; i++) {
     printf(" %d  ", i + 1);
-    for (int j = 0; j < size; j++)
-    {
+    for (int j = 0; j < size; j++) {
       printf("[%c]", get_c(board, size, i, j));
     }
     printf("\n");
@@ -19,23 +17,19 @@ void printBoard(const char *board, const int size)
 
   printf("\n    ");
 
-  for (int i = 65; i <= 72; i++)
-  {
+  for (int i = 65; i <= 72; i++) {
     printf(" %c ", (char)i);
   }
 }
 
-void movePiece(char *board, const int size)
-{
+// ======================================================================== Move Piece
+void movePiece(char *board, const int size) {
   const int letterOffset = 97, numberOffset = 49;
-  char input[5];
+  char input[32];
 
-  printf("\n\nEnter your move: ");
-  scanf("%s", input);
-  printf("\n\n");
+  inputStringPrompt(input, "\n\nEnter your move: ", "\n\n");
 
-  for (int i = 0; input[i]; i++)
-  {
+  for (int i = 0; input[i]; i++) {
     input[i] = tolower(input[i]);
   }
 
@@ -51,53 +45,21 @@ void movePiece(char *board, const int size)
 
   char pieceToMove = get_c(board, size, oldI, oldJ);
 
-  switch (toLower(pieceToMove))
-  {
-  case 'p':
-    if (1 != isValidMovePawn(pieceToMove, board, size, oldI, oldJ, newI, newJ))
-    {
-      return;
-    }
-    break;
-
-  case 'r':
-    if (1 != isValidMoverook(pieceToMove, board, size, oldI, oldJ, newI, newJ))
-    {
-      return;
-    }
-    break;
-  }
+  // switch (toLower(pieceToMove)) {
+  //   case 'p':
+  //     if (1 != isValidMovePawn(pieceToMove, board, size, oldI, oldJ, newI, newJ)) { return; }break;
+  //   case 'r':
+  //     if (1 != isValidMoveRook(pieceToMove, board, size, oldI, oldJ, newI, newJ)) { return; }break;
+  //   case 'k':
+  //     if (1 != isValidMoveKing(pieceToMove, board, size, oldI, oldJ, newI, newJ)) { return; }break;
+  //   case 'n':
+  //     if (1 != isValidMoveKnight(pieceToMove, board, size, oldI, oldJ, newI, newJ)) { return; }break;
+  //   case 'q':
+  //     if (1 != isValidMoveQueen(pieceToMove, board, size, oldI, oldJ, newI, newJ)) { return; }break;
+  //   case 'b':
+  //     if (1 != isValidMoveBishop(pieceToMove, board, size, oldI, oldJ, newI, newJ)) { return; }break;
+  // }
 
   set_c(board, size, oldI, oldJ, ' ');
   set_c(board, size, newI, newJ, pieceToMove);
-}
-
-int isValidMovePawn(pieceToMove, board, size, oldi, oldj, newi, newj)
-{
-  return newi == oldi + 1;
-}
-
-int isValidMoveRook(pieceToMove, board, size, oldi, oldj, newi, newj)
-{
-  int counter = 0;
-  while (counter++ < MAX_LOOPS)
-  {
-    if (newi == 0 || newj == 0 || newi == GRID_SIZE || newj == GRID_SIZE)
-    {
-      printf("You can't move out of bounds you cheeky bugger you");
-      return 0;
-    }
-    else if (newi != ' ' || newj != ' ')
-    {
-      return 1;
-    }
-    else if (newi != oldi+8 || newi != oldi-8)
-    {
-      return 0;
-    }
-    // Rule for checking whether left or right movement is valid
-    else if (newj )
-
-    return 1;
-  }
 }
