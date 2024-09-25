@@ -1,0 +1,5 @@
+C:/Users/super/Documents/GitHub/Low-Level-Chess/build/CMakeFiles/game.dir
+C:/Users/super/Documents/GitHub/Low-Level-Chess/build/CMakeFiles/clean-obj.dir
+C:/Users/super/Documents/GitHub/Low-Level-Chess/build/CMakeFiles/clean-all.dir
+C:/Users/super/Documents/GitHub/Low-Level-Chess/build/CMakeFiles/edit_cache.dir
+C:/Users/super/Documents/GitHub/Low-Level-Chess/build/CMakeFiles/rebuild_cache.dir
