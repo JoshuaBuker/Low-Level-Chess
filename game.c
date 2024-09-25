@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "gameLogic/header/board.h"
+#include "./gameLogic/header/board.h"
 #include <stdlib.h>
 
 #ifndef GRID_SIZE
