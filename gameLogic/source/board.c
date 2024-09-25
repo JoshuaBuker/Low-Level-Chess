@@ -1,7 +1,7 @@
 #include <stdio.h>
-#include "./util/header/util.h"
+#include "util.h"
 #include <ctype.h>
-#include "./gameLogic/header/rules.h"
+#include "rules.h"
 
 #ifndef GRID_SIZE
 #define GRID_SIZE 8
