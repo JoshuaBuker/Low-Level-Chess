@@ -1,3 +1,0 @@
-"C:\Program Files\CMake\bin\cmake.exe" -E rm -f CMakeFiles\GameProject.dir/objects.a
-C:\msys64\ucrt64\bin\ar.exe qc CMakeFiles\GameProject.dir/objects.a @CMakeFiles\GameProject.dir\objects1.rsp
-C:\msys64\ucrt64\bin\gcc.exe -g -Wl,--whole-archive CMakeFiles\GameProject.dir/objects.a -Wl,--no-whole-archive -o GameProject.exe -Wl,--out-implib,libGameProject.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\GameProject.dir\linkLibs.rsp
