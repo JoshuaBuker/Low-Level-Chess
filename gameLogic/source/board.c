@@ -53,11 +53,19 @@ void movePiece(char board[GRID_SIZE][GRID_SIZE], const int size) {
   char pieceToMove = board[oldI][oldJ];
   int validMove = 0;
 
-  switch (tolower(pieceToMove)) {
+  // switch(tolower(pieceToMove)) {
+  switch ((pieceToMove)) {
     case 'p':
-      validMove = isValidMovePawn(pieceToMove, board, size, oldI, oldJ, newI, newJ);
+      validMove = isValidMovePawnLower(pieceToMove, board, size, oldI, oldJ, newI, newJ);
+      break;
+    case 'P':
+      validMove = isValidMovePawnUpper(pieceToMove, board, size, oldI, oldJ, newI, newJ);
       break;
     case 'r':
+      validMove = isValidMoveRook(pieceToMove, board, size, oldI, oldJ, newI, newJ);
+      break;
+    // I BROKE THE CARDINAL RULE FOR CODERS. I TOUCHED ANOTHER MANS CODE. ACCEPT MY DEEPEST APOLOGIES!!!
+    case 'R':
       validMove = isValidMoveRook(pieceToMove, board, size, oldI, oldJ, newI, newJ);
       break;
     case 'k':
