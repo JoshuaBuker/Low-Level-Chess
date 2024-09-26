@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include<stdlib.h>
 #include "./util/header/util.h"
 #include <ctype.h>
 #include "./gameLogic/header/rules.h"
@@ -34,7 +35,7 @@ void movePiece(char board[GRID_SIZE][GRID_SIZE], const int size) {
   const int letterOffset = 97, numberOffset = 49;
   char input[32];
 
-  inputStringPrompt(input, "\n\nEnter your better move: ", "\n\n");
+  inputStringPrompt(input, "\n\nEnter your move: ", "\n");
 
   for (int i = 0; input[i]; i++) {
     input[i] = tolower(input[i]);
@@ -48,29 +49,34 @@ void movePiece(char board[GRID_SIZE][GRID_SIZE], const int size) {
   int newJ = ((int)input[2]) - letterOffset;
   // moves piece up and down
   int newI = ((int)input[3]) - numberOffset;
-  // 3
 
-  // char pieceToMove = get_c(board, size, oldI, oldJ);
   char pieceToMove = board[oldI][oldJ];
+  int validMove = 0;
 
-  // switch (toLower(pieceToMove)) {
-  //   case 'p':
-  //     if (1 != isValidMovePawn(pieceToMove, board, size, oldI, oldJ, newI, newJ)) { return; }break;
-  //   case 'r':
-  //     if (1 != isValidMoveRook(pieceToMove, board, size, oldI, oldJ, newI, newJ)) { return; }break;
-  //   case 'k':
-  //     if (1 != isValidMoveKing(pieceToMove, board, size, oldI, oldJ, newI, newJ)) { return; }break;
-  //   case 'n':
-  //     if (1 != isValidMoveKnight(pieceToMove, board, size, oldI, oldJ, newI, newJ)) { return; }break;
-  //   case 'q':
-  //     if (1 != isValidMoveQueen(pieceToMove, board, size, oldI, oldJ, newI, newJ)) { return; }break;
-  //   case 'b':
-  //     if (1 != isValidMoveBishop(pieceToMove, board, size, oldI, oldJ, newI, newJ)) { return; }break;
-  // }
-
-  // set_c(board, size, oldI, oldJ, ' ');
-  // set_c(board, size, newI, newJ, pieceToMove);
-
-  board[oldI][oldJ] = ' ';
-  board[newI][newJ] = pieceToMove;
+  switch (tolower(pieceToMove)) {
+    case 'p':
+      validMove = isValidMovePawn(pieceToMove, board, size, oldI, oldJ, newI, newJ);
+      break;
+    case 'r':
+      validMove = isValidMoveRook(pieceToMove, board, size, oldI, oldJ, newI, newJ);
+      break;
+    case 'k':
+      validMove = isValidMoveKing(pieceToMove, board, size, oldI, oldJ, newI, newJ);
+      break;
+    case 'n':
+      validMove = isValidMoveKnight(pieceToMove, board, size, oldI, oldJ, newI, newJ);
+      break;
+    case 'q':
+      validMove = isValidMoveQueen(pieceToMove, board, size, oldI, oldJ, newI, newJ);
+      break;
+    case 'b':
+      validMove = isValidMoveBishop(pieceToMove, board, size, oldI, oldJ, newI, newJ);
+      break;
+  }
+  if (validMove == 1) {
+    board[oldI][oldJ] = ' ';
+    board[newI][newJ] = pieceToMove;
+  } else {
+    movePiece(board, size);
+  }
 }

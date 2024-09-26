@@ -19,6 +19,7 @@ set(SOURCE_FILES
     game.c
     gameLogic/source/board.c
     util/source/util.c
+    gameLogic/source/rules.c
 )
 
 # Add the executable target

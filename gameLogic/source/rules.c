@@ -1,4 +1,7 @@
 #include <stdio.h>
+#include <stdlib.h>
+
+#include "./util/header/util.h"
 
 #ifndef GRID_SIZE
 #define GRID_SIZE 8
@@ -15,32 +18,59 @@ int isUserInputValid(char* input) {
 
 // ============================================================================================= Pawn
 int isValidMovePawn(char pieceToMove, char board[GRID_SIZE][GRID_SIZE], int size, int oldi, int oldj, int newi, int newj) {
-  return newi == oldi + 1;
+  return 1;
 }
 
 // ============================================================================================= Rook
 int isValidMoveRook(char pieceToMove, char board[GRID_SIZE][GRID_SIZE], int size, int oldi, int oldj, int newi, int newj) {
-  // int counter = 0;
-  // while (counter++ < MAX_LOOPS)
-  // {
-  //   if (newi == 0 || newj == 0 || newi == size || newj == size)
-  //   {
-  //     printf("You can't move out of bounds you cheeky bugger you");
-  //     return 0;
-  //   }
-  //   else if (newi != ' ' || newj != ' ')
-  //   {
-  //     return 1;
-  //   }
-  //   else if (newi != oldi+8 || newi != oldi-8)
-  //   {
-  //     return 0;
-  //   }
-  //   // Rule for checking whether left or right movement is valid
-  //   else if (newj )
+  int distance_i = abs((newi + 1) - (oldi + 1));
+  int distance_j = abs((newj + 1) - (oldj + 1));
 
-  //   return 1;
-  // }
+  if (isOnTeam(pieceToMove, board[newi][newj])) {
+    printf("You cannot attack your own pieces.");
+    return 2;
+  }
+
+  // Check if a diagonal move was played
+  if (distance_i > 0 && distance_j > 0) {
+    printf("Rook cannot move diagonally.\n");
+    return 2;
+  }
+
+  if (distance_i > 0) {
+    if (newi - oldi < 0) {
+      for (int i = oldi - 1; i > newi; i--) {
+        if (board[i][oldj] != ' ') {
+          printf("Path blocked by %c", board[i][oldj]);
+          return 2;
+        }
+      }
+    } else {
+      for (int i = oldi + 1; i < newi; i++) {
+        if (board[i][oldj] != ' ' || !isOnTeam(board[i][oldj], pieceToMove)) {
+          printf("Path blocked by %c", board[i][oldj]);
+          return 2;
+        }
+      }
+    }
+  } else {
+    if (newj - oldj > 0) {
+      for (int j = oldj + 1; j < newj; j++) {
+        if (board[oldi][j] != ' ') {
+          printf("Path blocked by %c", board[oldi][j]);
+          return 2;
+        }
+      }
+    } else {
+      for (int j = oldj - 1; j > newj; j--) {
+        if (board[oldi][j] != ' ') {
+          printf("Path blocked by %c", board[oldi][j]);
+          return 2;
+        }
+      }
+    }
+  }
+  
   return 1;
 }
 

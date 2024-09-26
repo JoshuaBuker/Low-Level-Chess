@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "./gameLogic/header/board.h"
+#include "./util/header/util.h"
 #include <stdlib.h>
 
 #ifndef GRID_SIZE
@@ -22,7 +23,7 @@ int main(void) {
   while (1) {
       printBoard(board, GRID_SIZE);
       movePiece(board, GRID_SIZE);
-      system("cls");
+      // system("cls");
   }
 
   return 0;
