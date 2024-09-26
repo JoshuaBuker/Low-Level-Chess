@@ -18,7 +18,52 @@ int isUserInputValid(char* input) {
 
 // ============================================================================================= Pawn
 int isValidMovePawn(char pieceToMove, char board[GRID_SIZE][GRID_SIZE], int size, int oldi, int oldj, int newi, int newj) {
-  return 1;
+
+  char element = board;
+
+  // printf("%d\n", ' ');
+  // if (' '  == 32) {
+  //   printf("Condition passed\n");
+  // }
+  // printf("%c", board[0][0]);
+  // printf("[%c]", (char) board[0][0]);
+
+  if (board[5][5] != 'x') {
+    printf("TRUE\n");
+  }
+
+
+  // Pawn is not on starting row and can only move forward if space is empty
+  // TODO Fix: pawn can move forward even if space is not empty
+  if (newi == oldi-1 && newj == oldj) {
+    printf("Move forward\n");
+    // return newi == oldi - 1;
+    return 1;
+  }
+
+  // Pawn is on starting row
+  if (oldi == 6 && newj == oldj) {
+    printf("Move forward on starting row\n");
+    return (newi == oldi-1 || newi == oldi-2 );
+  }
+
+  // Pawn move diagonal left
+  // TODO Fix: pawn can move diagonal left even if space is empty
+  if (newi == oldi-1 && (newj == oldj-1 || newj == oldj+1) && (board != (char) 32)) {
+    printf("Diagonal\n");
+    return 1;
+  }
+
+  // Pawn move diagonal right
+  // TODO Fix: pawn can move diagonal right even if space is empty
+  // if (newi == oldi-1 && newj == oldj+1) {
+  //   printf("Move diagonal right\n");
+  //   return 1;
+  // }
+
+  printf("isValidMovePawn return 0\n");
+  return 0;
+
 }
 
 // ============================================================================================= Rook
