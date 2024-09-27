@@ -23,9 +23,10 @@ int isValidMovePawnLower(char pieceToMove, char board[GRID_SIZE][GRID_SIZE], int
   if (newi == oldi-1 && newj == oldj && board[newi][newj] == ' ') {
     printf("Move forward\n");
     if (newi == 0) {
-      char userInput;
-      scanf("%c", &userInput);
-      pieceToMove = userInput;
+      printf("Change piece to q, b, r, n\n");
+      // char userInput;
+      // scanf("%c", &userInput);
+      // pieceToMove = userInput;
       // board[oldi][oldj] = ' ';
       // board[newi][newj] = userInput;
     }
@@ -63,11 +64,12 @@ int isValidMovePawnUpper(char pieceToMove, char board[GRID_SIZE][GRID_SIZE], int
   if (newi == oldi+1 && newj == oldj && board[newi][newj] == ' ') {
     printf("Move forward\n");
     if (newi == 7) {
-      char userInput;
-      scanf("%c", &userInput);
+      printf("Change piece to q, b, r, n\n");
+      // char userInput;
+      // scanf("%c", &userInput);
       // pieceToMove = userInput;
-      board[oldi][oldj] = ' ';
-      board[newi][newj] = userInput;
+      // board[oldi][oldj] = ' ';
+      // board[newi][newj] = userInput;
     }
     return 1;
     return 1;
