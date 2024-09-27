@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "./util/header/util.h"
 
@@ -17,18 +18,24 @@ int isUserInputValid(char* input) {
 }
 
 // ============================================================================================= Pawn
-// TODO Ensure pawn is not allowed to go out of bounds
-int isValidMovePawnLower(char pieceToMove, char board[GRID_SIZE][GRID_SIZE], int size, int oldi, int oldj, int newi, int newj) {
+int isValidMovePawn(char* pieceToMove, char board[GRID_SIZE][GRID_SIZE], int size, int oldi, int oldj, int newi, int newj) {
+  if (pieceToMove[0] == 'p') {
+    return isValidMovePawnLower(pieceToMove, board, size, oldi, oldj, newi, newj);
+  } else {
+    return isValidMovePawnUpper(pieceToMove, board, size, oldi, oldj, newi, newj);
+  }
+}
+
+int isValidMovePawnLower(char* pieceToMove, char board[GRID_SIZE][GRID_SIZE], int size, int oldi, int oldj, int newi, int newj) {
+
+
   // Pawn move forward
   if (newi == oldi-1 && newj == oldj && board[newi][newj] == ' ') {
     printf("Move forward\n");
     if (newi == 0) {
       printf("Change piece to q, b, r, n\n");
-      // char userInput;
-      // scanf("%c", &userInput);
-      // pieceToMove = userInput;
-      // board[oldi][oldj] = ' ';
-      // board[newi][newj] = userInput;
+      scanf(" %c", pieceToMove);
+      *pieceToMove = tolower(*pieceToMove);
     }
     return 1;
   }
@@ -40,15 +47,12 @@ int isValidMovePawnLower(char pieceToMove, char board[GRID_SIZE][GRID_SIZE], int
   }
 
   // Pawn move diagonal
-  if (newi == oldi-1 && (newj == oldj-1 || newj == oldj+1) && board[newi][newj] != ' ') {
+  if (newi == oldi-1 && (newj == oldj-1 || newj == oldj+1) && board[newi][newj] != ' ' && isOnTeam(pieceToMove, board[newi][newj])) {
     printf("Diagonal\n");
     if (newi == 0) {
       printf("Change piece to q, b, r, n\n");
-      // char userInput;
-      // scanf(" %c", &userInput);
-      // pieceToMove = userInput;
-      // board[oldi][oldj] = ' ';
-      // board[newi][newj] = userInput;
+      scanf(" %c", pieceToMove);
+      *pieceToMove = tolower(*pieceToMove);
     }
     return 1;
   }
@@ -58,20 +62,15 @@ int isValidMovePawnLower(char pieceToMove, char board[GRID_SIZE][GRID_SIZE], int
 
 }
 
-// TODO Ensure pawn is not allowed to go out of bounds
-int isValidMovePawnUpper(char pieceToMove, char board[GRID_SIZE][GRID_SIZE], int size, int oldi, int oldj, int newi, int newj) {
+int isValidMovePawnUpper(char* pieceToMove, char board[GRID_SIZE][GRID_SIZE], int size, int oldi, int oldj, int newi, int newj) {
   // Pawn move forward
   if (newi == oldi+1 && newj == oldj && board[newi][newj] == ' ') {
     printf("Move forward\n");
     if (newi == 7) {
       printf("Change piece to q, b, r, n\n");
-      // char userInput;
-      // scanf("%c", &userInput);
-      // pieceToMove = userInput;
-      // board[oldi][oldj] = ' ';
-      // board[newi][newj] = userInput;
+      scanf(" %c", pieceToMove);
+      *pieceToMove = toupper(*pieceToMove);
     }
-    return 1;
     return 1;
   }
 
@@ -82,17 +81,13 @@ int isValidMovePawnUpper(char pieceToMove, char board[GRID_SIZE][GRID_SIZE], int
   }
 
   // Pawn move diagonal
-  if (newi == oldi+1 && (newj == oldj-1 || newj == oldj+1) && board[newi][newj] != ' ') {
+  if (newi == oldi+1 && (newj == oldj-1 || newj == oldj+1) && board[newi][newj] != ' ' && !isOnTeam(pieceToMove, board[newi][newj])) {
     printf("Diagonal\n");
     if (newi == 7) {
       printf("Change piece to q, b, r, n\n");
-      // char userInput;
-      // scanf(" %c", &userInput);
-      // pieceToMove = userInput;
-      // board[oldi][oldj] = ' ';
-      // board[newi][newj] = userInput;
+      scanf(" %c", pieceToMove);
+      *pieceToMove = toupper(*pieceToMove);
     }
-    return 1;
     return 1;
   }
 

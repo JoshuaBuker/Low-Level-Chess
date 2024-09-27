@@ -54,21 +54,12 @@ void movePiece(char board[GRID_SIZE][GRID_SIZE], const int size) {
   int validMove = 0;
   int isEligibleToChangePiece = 0;
 
-  // switch(tolower(pieceToMove)) {
-  switch ((pieceToMove)) {
+  switch(tolower(pieceToMove)) {
     case 'p':
-      validMove = isValidMovePawnLower(pieceToMove, board, size, oldI, oldJ, newI, newJ);
+      validMove = isValidMovePawn(&pieceToMove, board, size, oldI, oldJ, newI, newJ);
       isEligibleToChangePiece = newI == 0;
       break;
-    case 'P':
-      validMove = isValidMovePawnUpper(pieceToMove, board, size, oldI, oldJ, newI, newJ);
-      isEligibleToChangePiece = newI == 7;
-      break;
     case 'r':
-      validMove = isValidMoveRook(pieceToMove, board, size, oldI, oldJ, newI, newJ);
-      break;
-    // I BROKE THE CARDINAL RULE FOR CODERS. I TOUCHED ANOTHER MANS CODE. ACCEPT MY DEEPEST APOLOGIES!!!
-    case 'R':
       validMove = isValidMoveRook(pieceToMove, board, size, oldI, oldJ, newI, newJ);
       break;
     case 'k':
@@ -84,17 +75,8 @@ void movePiece(char board[GRID_SIZE][GRID_SIZE], const int size) {
       validMove = isValidMoveBishop(pieceToMove, board, size, oldI, oldJ, newI, newJ);
       break;
   }
-  if (validMove == 1 && pieceToMove == 'p' && isEligibleToChangePiece) {
-    board[oldI][oldJ] = ' ';
-    char userInput;
-    scanf(" %c", &userInput);
-    board[newI][newJ] = tolower(userInput);
-  } else if(validMove == 1 && pieceToMove == 'P' && isEligibleToChangePiece) {
-    board[oldI][oldJ] = ' ';
-    char userInput;
-    scanf(" %c", &userInput);
-    board[newI][newJ] = toupper(userInput);
-  } else if (validMove == 1) {
+
+  if (validMove == 1) {
     board[oldI][oldJ] = ' ';
     board[newI][newJ] = pieceToMove;
   } else {
