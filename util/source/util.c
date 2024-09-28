@@ -20,9 +20,19 @@ int inputStringPrompt(char* buffer, const char* prompt, const char* afterPrompt)
   return 1;
 }
 
-int isOnTeam(const char piece1, const char piece2) {
-  int isPiece1Lower = (97 <= piece1 && piece1 <= 122) ? 1 : 0;
-  int isPiece2Lower = (97 <= piece2 && piece2 <= 122) ? 1 : 0;
+// int isOnTeam(const char piece1, const char piece2) {
+//   int isPiece1Lower = (97 <= piece1 && piece1 <= 122) ? 1 : 0;
+//   int isPiece2Lower = (97 <= piece2 && piece2 <= 122) ? 1 : 0;
   
-  return (isPiece1Lower == isPiece2Lower);
+//   return (isPiece1Lower == isPiece2Lower);
+// }
+
+int isOnTeam(char piece1, char piece2) {
+  // Lower case
+  if ((int) piece1 >= 97 && (int) piece1 <= 122 && (int) piece2 >= 97 && (int) piece2 <= 122) {return 1;}
+
+  // Upper case
+  if ((int) piece1 >= 65 && (int) piece1 <= 90 && (int) piece2 >= 65 && (int) piece2 <= 90) {return 1;}
+
+  return 0;
 }

@@ -26,6 +26,7 @@ int isValidMovePawn(char* pieceToMove, char board[GRID_SIZE][GRID_SIZE], int siz
   }
 }
 
+// ============================================================================================= Pawn Lower
 int isValidMovePawnLower(char* pieceToMove, char board[GRID_SIZE][GRID_SIZE], int size, int oldi, int oldj, int newi, int newj) {
 
 
@@ -41,7 +42,7 @@ int isValidMovePawnLower(char* pieceToMove, char board[GRID_SIZE][GRID_SIZE], in
   }
 
   // Pawn is on starting row
-  if (oldi == 6 && newj == oldj) {
+  if (oldi == 6 && newj == oldj && (newi == oldi-1 || newi == oldi-2)) {
     printf("Move forward on starting row\n");
     return (newi == oldi-1 || newi == oldi-2 );
   }
@@ -62,6 +63,7 @@ int isValidMovePawnLower(char* pieceToMove, char board[GRID_SIZE][GRID_SIZE], in
 
 }
 
+// ============================================================================================= Pawn Upper
 int isValidMovePawnUpper(char* pieceToMove, char board[GRID_SIZE][GRID_SIZE], int size, int oldi, int oldj, int newi, int newj) {
   // Pawn move forward
   if (newi == oldi+1 && newj == oldj && board[newi][newj] == ' ') {
@@ -97,6 +99,7 @@ int isValidMovePawnUpper(char* pieceToMove, char board[GRID_SIZE][GRID_SIZE], in
 }
 
 // ============================================================================================= Rook
+// TODO Fix: Rook moves off map (lower - a8a9), Rook can't move (upper)
 int isValidMoveRook(char pieceToMove, char board[GRID_SIZE][GRID_SIZE], int size, int oldi, int oldj, int newi, int newj) {
   int distance_i = abs((newi + 1) - (oldi + 1));
   int distance_j = abs((newj + 1) - (oldj + 1));
@@ -186,7 +189,72 @@ int isValidMoveKnight(char pieceToMove, char board[GRID_SIZE][GRID_SIZE], int si
 
 // ============================================================================================= King
 int isValidMoveKing(char pieceToMove, char board[GRID_SIZE][GRID_SIZE], int size, int oldi, int oldj, int newi, int newj) {
-  return 1;
+  if (pieceToMove == 'k') {
+    isValidMoveKingLower(pieceToMove, board, size, oldi, oldj, newi, newj);
+  } else {
+    isValidMoveKingUpper(pieceToMove, board, size, oldi, oldj, newi, newj);
+  }
+}
+
+// ============================================================================================= King Lower
+int isValidMoveKingLower(char pieceToMove, char board[GRID_SIZE][GRID_SIZE], int size, int oldi, int oldj, int newi, int newj) {
+  int distance_i = abs((newi + 1) - (oldi + 1));
+  int distance_j = abs((newj + 1) - (oldj + 1));
+
+  printf("oldi: %d newi: %d\n", oldi, newi);
+  printf("oldj: %d newj: %d\n", oldj, newj);
+  printf("board: %d\n", board[newi][newj]);
+  printf("isOnTeam: %d\n", !isOnTeam(pieceToMove, board[newi][newj]));
+
+  // Move king back and forward
+  if (distance_i == 1 && distance_j == 0 && !isOnTeam(pieceToMove, board[newi][newj]) ) {
+    return 1;
+  }
+
+  // Move king side to side
+  if (distance_i == 0 && distance_j == 1 && !isOnTeam(pieceToMove, board[newi][newj])) {
+    return 1;
+  }
+
+  // Move king diagonal
+  if (distance_i == 1 && distance_j == 1 && !isOnTeam(pieceToMove, board[newi][newj])) {
+    return 1;
+  }
+
+  printf("Invalid move for piece: %c\n", pieceToMove);
+  return 2;
+}
+
+// ============================================================================================= King Upper
+int isValidMoveKingUpper(char pieceToMove, char board[GRID_SIZE][GRID_SIZE], int size, int oldi, int oldj, int newi, int newj) {
+  int distance_i = abs((newi + 1) - (oldi + 1));
+  int distance_j = abs((newj + 1) - (oldj + 1));
+
+  // printf("UPPER distance_i: %d\n", distance_i);
+  // printf("UPPER distance_j: %d\n", distance_j);
+  printf("piece: %c\n", pieceToMove);
+  printf("oldi: %d newi: %d\n", oldi, newi);
+  printf("oldj: %d newj: %d\n", oldj, newj);
+  printf("board: %d\n", board[newi][newj]);
+
+  // Move king back and forward
+  if (distance_i == 1 && distance_j == 0 && !isOnTeam(pieceToMove, board[newi][newj])) {
+    printf("Valid move\n");
+    return 1;
+  }
+
+  // Move king side to side
+  if (distance_i == 0 && distance_j == 1 && !isOnTeam(pieceToMove, board[newi][newj])) {
+    return 1;
+  }
+
+  // Move king diagonal
+  if (distance_i == 1 && distance_j == 1 && !isOnTeam(pieceToMove, board[newi][newj])) {
+    return 1;
+  }
+
+  printf("Invalid move for piece: %c\n", pieceToMove);
+  return 2;
 }
 
 // ============================================================================================= Queen
