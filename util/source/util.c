@@ -21,8 +21,8 @@ int inputStringPrompt(char* buffer, const char* prompt, const char* afterPrompt)
 }
 
 int isOnTeam(const char piece1, const char piece2) {
-  int isPiece1Lower = (97 <= (int)piece1 && (int)piece1 <= 122) ? 1 : 0;
-  int isPiece2Lower = (97 <= (int)piece2 && (int)piece2 <= 122) ? 1 : 0;
+  int isPiece1Lower = (97 <= piece1 && piece1 <= 122) ? 1 : 0;
+  int isPiece2Lower = (97 <= piece2 && piece2 <= 122) ? 1 : 0;
   
   return (isPiece1Lower == isPiece2Lower);
 }

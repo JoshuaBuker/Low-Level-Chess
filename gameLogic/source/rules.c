@@ -122,7 +122,7 @@ int isValidMoveRook(char pieceToMove, char board[GRID_SIZE][GRID_SIZE], int size
       }
     } else {
       for (int i = oldi + 1; i < newi; i++) {
-        if (board[i][oldj] != ' ' || !isOnTeam(board[i][oldj], pieceToMove)) {
+        if (board[i][oldj] != ' ') {
           printf("Path blocked by %c", board[i][oldj]);
           return 2;
         }
@@ -151,6 +151,33 @@ int isValidMoveRook(char pieceToMove, char board[GRID_SIZE][GRID_SIZE], int size
 
 // ============================================================================================= Bishop
 int isValidMoveBishop(char pieceToMove, char board[GRID_SIZE][GRID_SIZE], int size, int oldi, int oldj, int newi, int newj) {
+  int distance_i = abs((newi + 1) - (oldi + 1));
+  int distance_j = abs((newj + 1) - (oldj + 1));
+
+  if (board[newi][newj] != ' ' && isOnTeam(pieceToMove, board[newi][newj])) {
+    printf("You cannot attack your own pieces.");
+    return 2;
+  }
+
+  // Check if a perfectly diagonal move was played
+  if (distance_i != distance_j) {
+    printf("Bishop must move diagonally.\n");
+    return 2;
+  }
+
+  int isPositive_I = newi > oldi;
+  int isPositive_J = newj > oldj;
+
+  for (int i = 1; i <= distance_i-1; i++) {
+    int temp_I = (isPositive_I ? oldi + i : oldi - i);
+    int temp_J = (isPositive_J ? oldj + i : oldj - i);
+    printf("(%d, %d)\n", temp_I, temp_J);
+    if (board[temp_I][temp_J] != ' ') {
+      printf("Path blocked by %c", board[temp_I][temp_J]);
+      return 2;
+    }
+  }
+
   return 1;
 }
 
