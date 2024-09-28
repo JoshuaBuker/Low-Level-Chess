@@ -191,5 +191,69 @@ int isValidMoveKing(char pieceToMove, char board[GRID_SIZE][GRID_SIZE], int size
 
 // ============================================================================================= Queen
 int isValidMoveQueen(char pieceToMove, char board[GRID_SIZE][GRID_SIZE], int size, int oldi, int oldj, int newi, int newj) {
+  int distance_I = abs((newi + 1) - (oldi + 1));
+  int distance_J = abs((newj + 1) - (oldj + 1));
+
+  if (board[newi][newj] != ' ' && isOnTeam(pieceToMove, board[newi][newj])) {
+    printf("You cannot attack your own pieces.");
+    return 2;
+  }
+
+  int isPositive_I = newi > oldi;
+  int isPositive_J = newj > oldj;
+
+  if (distance_I == distance_J) { // Diagonal
+    for (int i = 1; i <= distance_I-1; i++) {
+      int temp_I = (isPositive_I ? oldi + i : oldi - i);
+      int temp_J = (isPositive_J ? oldj + i : oldj - i);
+      if (board[temp_I][temp_J] != ' ') {
+        printf("Path blocked by %c", board[temp_I][temp_J]);
+        return 2;
+      }
+    }
+  } else { // Cardinal
+    if (distance_I > 0 && distance_J > 0) {
+      printf("Queen must move diagonal or cardinally");
+      return 2;
+    }
+    if (distance_I > 0) {
+      if (newi - oldi < 0) {
+        for (int i = oldi - 1; i > newi; i--) {
+          if (board[i][oldj] != ' ') {
+            printf("Path blocked by %c", board[i][oldj]);
+            return 2;
+          }
+        }
+      } else {
+        for (int i = oldi + 1; i < newi; i++) {
+          if (board[i][oldj] != ' ') {
+            printf("Path blocked by %c", board[i][oldj]);
+            return 2;
+          }
+        }
+      }
+    } else {
+      if (newj - oldj > 0) {
+        for (int j = oldj + 1; j < newj; j++) {
+          if (board[oldi][j] != ' ') {
+            printf("Path blocked by %c", board[oldi][j]);
+            return 2;
+          }
+        }
+      } else {
+        for (int j = oldj - 1; j > newj; j--) {
+          if (board[oldi][j] != ' ') {
+            printf("Path blocked by %c", board[oldi][j]);
+            return 2;
+          }
+        }
+      }
+    }
+  }
+
+
+
+
+
   return 1;
 }
