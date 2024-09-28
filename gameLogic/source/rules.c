@@ -99,7 +99,6 @@ int isValidMovePawnUpper(char* pieceToMove, char board[GRID_SIZE][GRID_SIZE], in
 }
 
 // ============================================================================================= Rook
-// TODO Fix: Rook moves off map (lower - a8a9), Rook can't move (upper)
 int isValidMoveRook(char pieceToMove, char board[GRID_SIZE][GRID_SIZE], int size, int oldi, int oldj, int newi, int newj) {
   int distance_i = abs((newi + 1) - (oldi + 1));
   int distance_j = abs((newj + 1) - (oldj + 1));
