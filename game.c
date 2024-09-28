@@ -22,6 +22,7 @@ int main(void) {
 
   while (1) {
       printBoard(board, GRID_SIZE);
+      winCondition(board, GRID_SIZE);
       movePiece(board, GRID_SIZE);
       // system("cls");
   }

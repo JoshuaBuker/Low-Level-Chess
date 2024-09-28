@@ -28,7 +28,8 @@ int isValidMovePawn(char* pieceToMove, char board[GRID_SIZE][GRID_SIZE], int siz
 
 // ============================================================================================= Pawn Lower
 int isValidMovePawnLower(char* pieceToMove, char board[GRID_SIZE][GRID_SIZE], int size, int oldi, int oldj, int newi, int newj) {
-
+  int distance_i = abs((newi + 1) - (oldi + 1));
+  int distance_j = abs((newj + 1) - (oldj + 1));
 
   // Pawn move forward
   if (newi == oldi-1 && newj == oldj && board[newi][newj] == ' ') {
@@ -48,7 +49,7 @@ int isValidMovePawnLower(char* pieceToMove, char board[GRID_SIZE][GRID_SIZE], in
   }
 
   // Pawn move diagonal
-  if (newi == oldi-1 && (newj == oldj-1 || newj == oldj+1) && board[newi][newj] != ' ' && isOnTeam(pieceToMove, board[newi][newj])) {
+  if (newi == oldi-1 && distance_j == 1 && !isOnTeam(pieceToMove, board[newi][newj])) {
     printf("Diagonal\n");
     if (newi == 0) {
       printf("Change piece to q, b, r, n\n");
@@ -65,6 +66,9 @@ int isValidMovePawnLower(char* pieceToMove, char board[GRID_SIZE][GRID_SIZE], in
 
 // ============================================================================================= Pawn Upper
 int isValidMovePawnUpper(char* pieceToMove, char board[GRID_SIZE][GRID_SIZE], int size, int oldi, int oldj, int newi, int newj) {
+  int distance_i = abs((newi + 1) - (oldi + 1));
+  int distance_j = abs((newj + 1) - (oldj + 1));
+
   // Pawn move forward
   if (newi == oldi+1 && newj == oldj && board[newi][newj] == ' ') {
     printf("Move forward\n");
@@ -83,7 +87,7 @@ int isValidMovePawnUpper(char* pieceToMove, char board[GRID_SIZE][GRID_SIZE], in
   }
 
   // Pawn move diagonal
-  if (newi == oldi+1 && (newj == oldj-1 || newj == oldj+1) && board[newi][newj] != ' ' && !isOnTeam(pieceToMove, board[newi][newj])) {
+  if (newi == oldi+1 && distance_j == 1 && !isOnTeam(pieceToMove, board[newi][newj])) {
     printf("Diagonal\n");
     if (newi == 7) {
       printf("Change piece to q, b, r, n\n");
@@ -361,4 +365,25 @@ int isValidMoveQueen(char pieceToMove, char board[GRID_SIZE][GRID_SIZE], int siz
 
 
   return 1;
+}
+
+void winCondition(char board[GRID_SIZE][GRID_SIZE], const int size) {
+  int countOfMulletedHorseLower = 0;
+  int countOfMulletedHorseUpper = 0;
+  for (int i = 0; i < size; i++) {
+    for (int j = 0; j < size; j++) {
+      if (board[i][j] == 'n') {
+        countOfMulletedHorseLower++;
+      }
+
+      if (board[i][j] == 'N') {
+        countOfMulletedHorseUpper++;
+      }
+    }
+  }
+
+  if (countOfMulletedHorseLower == 0 || countOfMulletedHorseUpper == 0) {
+    printf("\nYou've lost all your mulleted horses.\nWhat reason do you have to play?\nGAME OVER :(");
+    exit(0);
+  }
 }
