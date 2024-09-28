@@ -184,7 +184,57 @@ int isValidMoveBishop(char pieceToMove, char board[GRID_SIZE][GRID_SIZE], int si
 
 // ============================================================================================= Knight
 int isValidMoveKnight(char pieceToMove, char board[GRID_SIZE][GRID_SIZE], int size, int oldi, int oldj, int newi, int newj) {
-  return 1;
+  if (pieceToMove == 'n') {
+    isValidMoveKnightLower(pieceToMove, board, size, oldi, oldj, newi, newj);
+  } else {
+    isValidMoveKnightUpper(pieceToMove, board, size, oldi, oldj, newi, newj);
+  }
+}
+
+// ============================================================================================= Knight Lower
+int isValidMoveKnightLower(char pieceToMove, char board[GRID_SIZE][GRID_SIZE], int size, int oldi, int oldj, int newi, int newj) {
+  int distance_i = abs((newi + 1) - (oldi + 1));
+  int distance_j = abs((newj + 1) - (oldj + 1));
+
+  printf("distance_i: %d\n", distance_i);
+  printf("distance_j: %d\n", distance_j);
+  printf("oldi: %d newi: %d\n", oldi, newi);
+  printf("oldj: %d newj: %d\n", oldj, newj);
+  printf("board: %d\n", board[newi][newj]);
+  printf("isOnTeam: %d\n", isOnTeam(pieceToMove, board[newi][newj]));
+
+  if (distance_i == 2 && distance_j == 1 && !isOnTeam(pieceToMove, board[newi][newj])) {
+    return 1;
+  }
+
+  if (distance_i == 1 && distance_j == 2 && !isOnTeam(pieceToMove, board[newi][newj])) {
+    return 1;
+  }
+
+  return 2;
+}
+
+// ============================================================================================= Knight Upper
+int isValidMoveKnightUpper(char pieceToMove, char board[GRID_SIZE][GRID_SIZE], int size, int oldi, int oldj, int newi, int newj) {
+  int distance_i = abs((newi + 1) - (oldi + 1));
+  int distance_j = abs((newj + 1) - (oldj + 1));
+
+  printf("distance_i: %d\n", distance_i);
+  printf("distance_j: %d\n", distance_j);
+  printf("oldi: %d newi: %d\n", oldi, newi);
+  printf("oldj: %d newj: %d\n", oldj, newj);
+  printf("board: %d\n", board[newi][newj]);
+  printf("isOnTeam: %d\n", isOnTeam(pieceToMove, board[newi][newj]));
+
+  if (distance_i == 2 && distance_j == 1 && !isOnTeam(pieceToMove, board[newi][newj])) {
+    return 1;
+  }
+
+  if (distance_i == 1 && distance_j == 2 && !isOnTeam(pieceToMove, board[newi][newj])) {
+    return 1;
+  }
+
+  return 2;
 }
 
 // ============================================================================================= King
@@ -200,11 +250,6 @@ int isValidMoveKing(char pieceToMove, char board[GRID_SIZE][GRID_SIZE], int size
 int isValidMoveKingLower(char pieceToMove, char board[GRID_SIZE][GRID_SIZE], int size, int oldi, int oldj, int newi, int newj) {
   int distance_i = abs((newi + 1) - (oldi + 1));
   int distance_j = abs((newj + 1) - (oldj + 1));
-
-  printf("oldi: %d newi: %d\n", oldi, newi);
-  printf("oldj: %d newj: %d\n", oldj, newj);
-  printf("board: %d\n", board[newi][newj]);
-  printf("isOnTeam: %d\n", !isOnTeam(pieceToMove, board[newi][newj]));
 
   // Move king back and forward
   if (distance_i == 1 && distance_j == 0 && !isOnTeam(pieceToMove, board[newi][newj]) ) {
@@ -229,13 +274,6 @@ int isValidMoveKingLower(char pieceToMove, char board[GRID_SIZE][GRID_SIZE], int
 int isValidMoveKingUpper(char pieceToMove, char board[GRID_SIZE][GRID_SIZE], int size, int oldi, int oldj, int newi, int newj) {
   int distance_i = abs((newi + 1) - (oldi + 1));
   int distance_j = abs((newj + 1) - (oldj + 1));
-
-  // printf("UPPER distance_i: %d\n", distance_i);
-  // printf("UPPER distance_j: %d\n", distance_j);
-  printf("piece: %c\n", pieceToMove);
-  printf("oldi: %d newi: %d\n", oldi, newi);
-  printf("oldj: %d newj: %d\n", oldj, newj);
-  printf("board: %d\n", board[newi][newj]);
 
   // Move king back and forward
   if (distance_i == 1 && distance_j == 0 && !isOnTeam(pieceToMove, board[newi][newj])) {

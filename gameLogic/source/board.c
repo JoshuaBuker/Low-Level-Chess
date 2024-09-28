@@ -66,6 +66,7 @@ void movePiece(char board[GRID_SIZE][GRID_SIZE], const int size) {
       validMove = isValidMoveKing(pieceToMove, board, size, oldI, oldJ, newI, newJ);
       break;
     case 'n':
+      printf("KNIGHT CASE\n");
       validMove = isValidMoveKnight(pieceToMove, board, size, oldI, oldJ, newI, newJ);
       break;
     case 'q':
