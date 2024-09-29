@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include<stdlib.h>
-#include "./util/header/util.h"
+#include "../../util/header/util.h"
 #include <ctype.h>
-#include "./gameLogic/header/rules.h"
+#include "../header/rules.h"
 
 #ifndef GRID_SIZE
 #define GRID_SIZE 8
@@ -31,11 +31,15 @@ void printBoard(const char board[GRID_SIZE][GRID_SIZE], const int size) {
 }
 
 // ======================================================================== Move Piece
-void movePiece(char board[GRID_SIZE][GRID_SIZE], const int size) {
+void movePiece(int isLowerTurn, char board[GRID_SIZE][GRID_SIZE], const int size) {
   const int letterOffset = 97, numberOffset = 49;
   char input[32];
 
-  inputStringPrompt(input, "\n\nEnter your move: ", "\n");
+  if (isLowerTurn == 1) {
+      inputStringPrompt(input, "\n\nLower Player, enter your move: ", "\n");
+  } else {
+      inputStringPrompt(input, "\n\nUpper Player, enter your move: ", "\n");
+  }
 
   for (int i = 0; input[i]; i++) {
     input[i] = tolower(input[i]);
@@ -50,8 +54,9 @@ void movePiece(char board[GRID_SIZE][GRID_SIZE], const int size) {
   // moves piece up and down
   int newI = ((int)input[3]) - numberOffset;
 
-  if (isUserInputValid(board, oldI, oldJ, newI, newJ) != 1) {
-    movePiece(board, size);
+  if (isUserInputValid(isLowerTurn, board, oldI, oldJ, newI, newJ) != 1) {
+    movePiece(isLowerTurn, board, size);
+    return;
   }
 
   char pieceToMove = board[oldI][oldJ];
@@ -84,6 +89,7 @@ void movePiece(char board[GRID_SIZE][GRID_SIZE], const int size) {
     board[oldI][oldJ] = ' ';
     board[newI][newJ] = pieceToMove;
   } else {
-    movePiece(board, size);
+    movePiece(isLowerTurn, board, size);
+    return;
   }
 }

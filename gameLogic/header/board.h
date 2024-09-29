@@ -6,6 +6,6 @@
 #endif
 
 void printBoard(const char board[GRID_SIZE][GRID_SIZE], const int size);
-void movePiece(char board[GRID_SIZE][GRID_SIZE], const int size);
+void movePiece(int isLowerTurn, char board[GRID_SIZE][GRID_SIZE], const int size);
 
 #endif

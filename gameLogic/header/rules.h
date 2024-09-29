@@ -5,7 +5,7 @@
 #define GRID_SIZE 8
 #endif
 
-int isUserInputValid      (char board[GRID_SIZE][GRID_SIZE], int oldi, int oldj, int newi, int newj);
+int isUserInputValid      (int isLowerTurn, char board[GRID_SIZE][GRID_SIZE], int oldi, int oldj, int newi, int newj);
 
 int isValidMoveBishop     (char pieceToMove, char board[GRID_SIZE][GRID_SIZE], int size, int oldi, int oldj, int newi, int newj);
 int isValidMoveKnight     (char pieceToMove, char board[GRID_SIZE][GRID_SIZE], int size, int oldi, int oldj, int newi, int newj);

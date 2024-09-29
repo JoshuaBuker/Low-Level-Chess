@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include "./gameLogic/header/board.h"
-#include "./util/header/util.h"
+#include "gameLogic/header/board.h"
+#include "util/header/util.h"
 #include <stdlib.h>
 
 #ifndef GRID_SIZE
@@ -8,6 +8,8 @@
 #endif
 
 int main(void) {
+  int isLowerTurn = 0;
+
   char board[GRID_SIZE][GRID_SIZE] =
   {
     {'R', 'N', 'B', 'K', 'Q', 'B', 'N', 'R'},
@@ -23,8 +25,10 @@ int main(void) {
   while (1) {
       printBoard(board, GRID_SIZE);
       winCondition(board, GRID_SIZE);
-      movePiece(board, GRID_SIZE);
-      // system("cls");
+      movePiece(isLowerTurn, board, GRID_SIZE);
+      system("cls");
+
+      isLowerTurn = (isLowerTurn ? 0 : 1);
   }
 
   return 0;

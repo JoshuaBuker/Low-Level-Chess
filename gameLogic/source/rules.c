@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
-#include "./util/header/util.h"
+#include "../../util/header/util.h"
 
 #ifndef GRID_SIZE
 #define GRID_SIZE 8
@@ -13,7 +14,7 @@
 #endif
 
 // =================================================================================  User input
-int isUserInputValid(char board[GRID_SIZE][GRID_SIZE], int oldi, int oldj, int newi, int newj) {
+int isUserInputValid(int isLowerTurn, char board[GRID_SIZE][GRID_SIZE], int oldi, int oldj, int newi, int newj) {
   if (oldi < 0 || oldj < 0 || newi < 0 || newj < 0 || oldi > 7 || oldj > 7 || newi > 7 || newj > 7) {
     printf("Invalid Input\n");
     return 2;
@@ -21,6 +22,11 @@ int isUserInputValid(char board[GRID_SIZE][GRID_SIZE], int oldi, int oldj, int n
 
   if (board[oldi][oldj] == ' ') {
     printf("Not a piece\n");
+    return 2;
+  }
+
+  if ((isLowerTurn == 1 && isupper(board[oldi][oldj])) || (isLowerTurn == 0 && islower(board[oldi][oldj]))) {
+    printf("Must move your own piece.\n");
     return 2;
   }
 
