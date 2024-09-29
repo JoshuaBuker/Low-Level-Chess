@@ -51,9 +51,7 @@ int isValidMovePawnLower(char* pieceToMove, char board[GRID_SIZE][GRID_SIZE], in
   if (newi == oldi-1 && newj == oldj && board[newi][newj] == ' ') {
     printf("Move forward\n");
     if (newi == 0) {
-      printf("Change piece to q, b, r, n\n");
-      scanf(" %c", pieceToMove);
-      *pieceToMove = tolower(*pieceToMove);
+      isValidPieceLower(pieceToMove);
     }
     return 1;
   }
@@ -68,9 +66,7 @@ int isValidMovePawnLower(char* pieceToMove, char board[GRID_SIZE][GRID_SIZE], in
   if (newi == oldi-1 && distance_j == 1 && !isOnTeam(pieceToMove, board[newi][newj])) {
     printf("Diagonal\n");
     if (newi == 0) {
-      printf("Change piece to q, b, r, n\n");
-      scanf(" %c", pieceToMove);
-      *pieceToMove = tolower(*pieceToMove);
+      isValidPieceLower(pieceToMove);
     }
     return 1;
   }
@@ -89,9 +85,7 @@ int isValidMovePawnUpper(char* pieceToMove, char board[GRID_SIZE][GRID_SIZE], in
   if (newi == oldi+1 && newj == oldj && board[newi][newj] == ' ') {
     printf("Move forward\n");
     if (newi == 7) {
-      printf("Change piece to q, b, r, n\n");
-      scanf(" %c", pieceToMove);
-      *pieceToMove = toupper(*pieceToMove);
+      isValidPieceUpper(pieceToMove);
     }
     return 1;
   }
@@ -106,9 +100,7 @@ int isValidMovePawnUpper(char* pieceToMove, char board[GRID_SIZE][GRID_SIZE], in
   if (newi == oldi+1 && distance_j == 1 && !isOnTeam(pieceToMove, board[newi][newj])) {
     printf("Diagonal\n");
     if (newi == 7) {
-      printf("Change piece to q, b, r, n\n");
-      scanf(" %c", pieceToMove);
-      *pieceToMove = toupper(*pieceToMove);
+      isValidPieceUpper(pieceToMove);
     }
     return 1;
   }
