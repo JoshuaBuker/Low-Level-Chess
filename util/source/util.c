@@ -36,3 +36,15 @@ int isOnTeam(char piece1, char piece2) {
 
   return 0;
 }
+
+int isValidPieceUpper(char* pieceToMove) {
+  while (1) {
+        printf("Change piece to q, b, r, n\n");
+        scanf(" %c", pieceToMove);
+        if (toupper(*pieceToMove) == 'Q' || toupper(*pieceToMove) == 'B' || toupper(*pieceToMove) == 'R' || toupper(*pieceToMove) == 'N') {
+          *pieceToMove = toupper(*pieceToMove);
+          break;
+        }
+        printf("Invalid input. Choose from the above options.\n");
+      }
+}
