@@ -50,6 +50,10 @@ void movePiece(char board[GRID_SIZE][GRID_SIZE], const int size) {
   // moves piece up and down
   int newI = ((int)input[3]) - numberOffset;
 
+  if (isUserInputValid(board, oldI, oldJ, newI, newJ)) {
+    movePiece(board, size);
+  }
+
   char pieceToMove = board[oldI][oldJ];
   int validMove = 0;
   int isEligibleToChangePiece = 0;

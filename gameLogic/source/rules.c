@@ -13,7 +13,17 @@
 #endif
 
 // =================================================================================  User input
-int isUserInputValid(char* input) {
+int isUserInputValid(char board[GRID_SIZE][GRID_SIZE], int oldi, int oldj, int newi, int newj) {
+  if (oldi < 0 || oldj < 0 || newi < 0 || newj < 0 || oldi > 7 || oldj > 7 || newi > 7 || newj > 7) {
+    printf("Invalid Input\n");
+    return 2;
+  }
+
+  if (board[oldi][oldj] == ' ') {
+    printf("Not a piece\n");
+    return 2;
+  }
+
   return 1;
 }
 
