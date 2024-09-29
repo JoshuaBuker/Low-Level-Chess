@@ -48,3 +48,15 @@ int isValidPieceUpper(char* pieceToMove) {
         printf("Invalid input. Choose from the above options.\n");
       }
 }
+
+int isValidPieceLower(char* pieceToMove) {
+  while (1) {
+        printf("Change piece to q, b, r, n\n");
+        scanf(" %c", pieceToMove);
+        if (tolower(*pieceToMove) == 'q' || tolower(*pieceToMove) == 'b' || tolower(*pieceToMove) == 'r' || tolower(*pieceToMove) == 'n') {
+          *pieceToMove = tolower(*pieceToMove);
+          break;
+        }
+        printf("Invalid input. Choose from the above options.\n");
+      }
+}
