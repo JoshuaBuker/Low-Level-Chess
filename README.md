@@ -9,4 +9,4 @@ To play, you will enter the starting location and the end location of your turn.
 
 
 ## How to run the game
-To run the game, simply download and run the exe found in "Build/Debug/". This will launch a terminal window with the game running. 
+To run the game, simply download the game.exe release file and run it.
